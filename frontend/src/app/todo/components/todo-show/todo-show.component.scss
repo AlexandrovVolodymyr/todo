@@ -1,0 +1,28 @@
+.todo-create {
+  max-width: 550px;
+  margin: auto;
+
+  &__row {
+    width: 100%;
+
+    .alert {
+      font-size: 12px;
+      display: inline-block;
+      padding: .375rem .75rem;
+    }
+
+    input {
+      border: 2px solid #ced4da;
+    }
+  }
+
+  &__name {
+    display: inline-block;
+    margin-bottom: 5px;
+    text-transform: uppercase;
+  }
+
+  .error {
+    border: 2px solid #ea7e7e;
+  }
+}

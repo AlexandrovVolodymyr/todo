@@ -1,0 +1,11 @@
+<div class="todo-list">
+  <h2 class="todo-list__title">Todo List</h2>
+  <div class="todo-list__item"
+       *ngFor="let todo of todoList">
+    <app-todo-item
+      [todo]="todo"
+      (editEvent)="editTodo($event)"
+      (deleteEvent)="deleteTodo($event)">
+    </app-todo-item>
+  </div>
+</div>
