@@ -9,6 +9,7 @@ import { TodoEditComponent } from './components/todo-edit/todo-edit.component';
 import { TodoCreateComponent } from './components/todo-create/todo-create.component';
 import { TodoItemComponent } from './components/todo-item/todo-item.component';
 import { FormItemComponent } from "./shared/components/form-item/form-item.component";
+import { NgxMaskModule } from "ngx-mask";
 
 const routes: Routes = [
   {
@@ -40,6 +41,7 @@ const routes: Routes = [
     CommonModule,
     RouterModule.forChild(routes),
     ReactiveFormsModule,
+    NgxMaskModule.forRoot()
   ]
 })
 export class TodoModule { }

@@ -2,7 +2,7 @@
   <div class="list-group-item list-group-item-action">
     <div class="d-flex w-100 justify-content-between">
       <h5 class="mb-1">{{ todo.name }}</h5>
-      <small>{{ todo.phoneNumber }}</small>
+      <small>{{ todo.phoneNumber | mask: '(000) 000-0000' }}</small>
     </div>
     <p class="mb-1">
       {{ todo.description }}

@@ -32,11 +32,8 @@
     <input type="text"
            class="form-control"
            formControlName="phoneNumber"
-           [class.error]="patternPhone">
-    <span class="alert alert-danger"
-          *ngIf="patternPhone">
-      Pattern: [ {{ this.form.get('phoneNumber').errors.pattern.requiredPattern }} ]
-    </span>
+           placeholder="(123) 456-7890"
+           mask="(000) 000-0000">
   </label>
 
   <div class="todo-create__actions d-flex justify-content-center">
