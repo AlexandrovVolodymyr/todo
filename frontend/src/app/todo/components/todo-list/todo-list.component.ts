@@ -1,8 +1,10 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { combineLatest, Observable, Subject, Subscription } from "rxjs";
-import { TodoItem, TodoService } from "../../services/todo.service";
-import { switchMap, takeUntil, tap } from "rxjs/operators";
 import { Router } from "@angular/router";
+
+import { Subject } from "rxjs";
+import { takeUntil } from "rxjs/operators";
+
+import { TodoItem, TodoService } from "../../services/todo.service";
 
 @Component({
   selector: 'app-todo-list',
@@ -11,10 +13,9 @@ import { Router } from "@angular/router";
 })
 export class TodoListComponent implements OnInit, OnDestroy {
 
-  todoList$: Observable<TodoItem[]>;
   todoList: TodoItem[];
 
-  subscription: Subject<void> = new Subject<void>();
+  subscription$$: Subject<void> = new Subject<void>();
 
   constructor(
     private todoService: TodoService,
@@ -24,7 +25,7 @@ export class TodoListComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.todoService.getTodo()
       .pipe(
-        takeUntil(this.subscription)
+        takeUntil(this.subscription$$)
       ).subscribe(data => {
         this.todoList = data;
     });
@@ -33,11 +34,9 @@ export class TodoListComponent implements OnInit, OnDestroy {
   deleteTodo(id: number) {
     this.todoService.deleteTodo(id)
       .pipe(
-        takeUntil(this.subscription)
+        takeUntil(this.subscription$$)
       )
-      .subscribe(() => {
-        this.todoList = this.todoList.filter(item => item['_id'] !== id)
-      });
+      .subscribe(() => this.todoList = this.todoList.filter(item => item['_id'] !== id));
   }
 
   editTodo(id: number) {
@@ -45,7 +44,7 @@ export class TodoListComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    this.subscription.next();
-    this.subscription.complete();
+    this.subscription$$.next();
+    this.subscription$$.complete();
   }
 }

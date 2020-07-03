@@ -1,8 +1,10 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { Router } from "@angular/router";
-import { TodoItem, TodoService } from "../../services/todo.service";
-import { Subscription } from "rxjs";
+
+import { Subject } from "rxjs";
+import { takeUntil } from "rxjs/operators";
+
+import { TodoService } from "../../services/todo.service";
 
 @Component({
   selector: 'app-todo-create',
@@ -11,57 +13,27 @@ import { Subscription } from "rxjs";
 })
 export class TodoCreateComponent implements OnInit, OnDestroy {
 
-  form: FormGroup;
+  subscription$$: Subject<void> = new Subject<void>();
 
   constructor(
-    private fb: FormBuilder,
-    private router: Router,
-    private todoService: TodoService
+    private todoService: TodoService,
+    private router: Router
   ) { }
 
-  ngOnInit(): void {
-    this.form = this.fb.group({
-      name: [null, [Validators.required]],
-      email: [null, [Validators.required]],
-      description: [null],
-      phoneNumber: [null, [Validators.pattern("[0-9 ]{12}")]]
-    });
+  ngOnInit() {
   }
 
-  get requiredName() {
-    return (
-      this.form.get('name').hasError('required') &&
-      this.form.get('name').touched
-    )
-  }
-
-  get requiredEmail() {
-    return (
-      this.form.get('email').hasError('required') &&
-      this.form.get('email').touched
-    )
-  }
-
-  get patternPhone() {
-    return (
-      this.form.get('phoneNumber').hasError('pattern') &&
-      this.form.get('phoneNumber').touched
-    )
-  }
-
-  submit() {
-    if (this.form.valid) {
-      this.todoService.createTodo(this.form.value)
-        .subscribe(res => this.router.navigate(['/todo/list']));
-    }
-  }
-
-  cancel() {
-    this.form.reset();
-    this.router.navigate(['/todo/list']);
+  submitForm(values: any) {
+    console.log('created');
+    this.todoService.createTodo(values)
+      .pipe(
+        takeUntil(this.subscription$$)
+      )
+      .subscribe(res => this.router.navigate(['/todo/list']));
   }
 
   ngOnDestroy() {
-    // this.subscription.unsubscribe();
+    this.subscription$$.next();
+    this.subscription$$.complete();
   }
 }

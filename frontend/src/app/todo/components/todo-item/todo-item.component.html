@@ -8,7 +8,7 @@
       {{ todo.description }}
     </p>
     <small>
-      <a href="{{ todo.email }}">{{ todo.email }}</a>
+      <a [href]="'mailto: ' + todo.email">{{ todo.email }}</a>
     </small>
     <span class="delete" (click)="delete()">
       <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-person-dash" fill="currentColor" xmlns="http://www.w3.org/2000/svg">

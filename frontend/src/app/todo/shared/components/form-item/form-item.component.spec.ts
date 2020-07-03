@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { TodoShowComponent } from './todo-show.component';
+import { FormItemComponent } from './form-item.component';
 
-describe('TodoShowComponent', () => {
-  let component: TodoShowComponent;
-  let fixture: ComponentFixture<TodoShowComponent>;
+describe('FormItemComponent', () => {
+  let component: FormItemComponent;
+  let fixture: ComponentFixture<FormItemComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ TodoShowComponent ]
+      declarations: [ FormItemComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(TodoShowComponent);
+    fixture = TestBed.createComponent(FormItemComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
