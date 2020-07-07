@@ -21,8 +21,8 @@ export class FormItemComponent implements OnInit {
     this.form = this.fb.group({
       name: [this.form && this.form.get('name') ? this.form.get('name') : null, [Validators.required]],
       email: [this.form && this.form.get('email') ? this.form.get('email') : null, [Validators.required]],
-      description: [this.form && this.form.get('description') ? this.form.get('description') : null],
-      phoneNumber: [this.form && this.form.get('phoneNumber') ? this.form.get('phoneNumber') : null]
+      description: this.form && this.form.get('description') ? this.form.get('description') : null,
+      phoneNumber: this.form && this.form.get('description') ? this.form.get('description') : null
     });
   }
 
@@ -40,13 +40,13 @@ export class FormItemComponent implements OnInit {
     )
   }
 
-  get patternPhone() {
-    // pattern("[0-9 ]{12}") убрал, добавил ngx-mask
-    return (
-      this.form.get('phoneNumber').hasError('pattern') &&
-      this.form.get('phoneNumber').touched
-    )
-  }
+  // get patternPhone() {
+  //   // pattern("[0-9 ]{12}") убрал, добавил ngx-mask
+  //   return (
+  //     this.form.get('phoneNumber').hasError('pattern') &&
+  //     this.form.get('phoneNumber').touched
+  //   )
+  // }
 
   submit() {
     if (this.form.valid) {

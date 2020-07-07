@@ -40,7 +40,7 @@ export class TodoEditComponent implements OnInit, OnDestroy {
           name: [this.todoItem.name, [Validators.required]],
           email: [this.todoItem.email, [Validators.required]],
           description: [this.todoItem.description],
-          phoneNumber: [this.todoItem.phoneNumber, [Validators.pattern("[0-9 ]{12}")]]
+          phoneNumber: [this.todoItem.phoneNumber]
         });
       });
   }

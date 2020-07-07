@@ -33,7 +33,8 @@
            class="form-control"
            formControlName="phoneNumber"
            placeholder="(123) 456-7890"
-           mask="(000) 000-0000">
+           mask="(000) 000-0000"
+           [class.error]="this.form.get('phoneNumber').invalid">
   </label>
 
   <div class="todo-create__actions d-flex justify-content-center">

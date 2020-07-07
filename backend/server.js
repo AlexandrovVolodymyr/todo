@@ -26,10 +26,10 @@ app.use(bodyParser.urlencoded({
   extended: false
 }));
 app.use(cors());
-app.use(express.static(path.join(__dirname, 'dist/mean-stack-crud-app')));
-app.use('/', express.static(path.join(__dirname, 'dist/mean-stack-crud-app')));
+app.use(express.static(path.join(__dirname, '../frontend/dist/frontend')));
+app.use('/', express.static(path.join(__dirname, '../frontend/dist/frontend')));
 app.use('/api', employeeRoute);
-
+console.log(__dirname);
 // Create port
 const port = process.env.PORT || 4000;
 const server = app.listen(port, () => {
